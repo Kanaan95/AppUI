@@ -1,0 +1,22 @@
+<ul class="list-group" *ngIf="docs.length > 0 else loading">
+  <li class="list-group-item" *ngFor="let d of docs">
+    <div class="media">
+      <img src="../../assets/images/avatar.png" class="mr-3" height="96" width="96" alt="...">
+      <div class="media-body">
+        <h5 class="mt-0 mb-1">{{d.handle}}</h5>
+        {{d.tweet}}
+      </div>
+    </div>
+  </li>
+  <li class="list-group-item text-center">
+    <loading></loading>
+  </li>
+</ul>
+
+<ng-template #loading>
+  <ul class="list-group">
+    <li class="list-group-item text-center">
+      <loading></loading>
+    </li>
+  </ul>
+</ng-template>

@@ -1,0 +1,21 @@
+<div class="content" role="main">
+
+
+    <!-- Terminal -->
+    <div class="terminal">
+      <div class="ribbon">
+        Python Console
+      </div>
+      <div class="body">
+        <!-- <pre >ng generate component xyz</pre> -->
+        <div *ngFor="let l of list_commands">
+          <input type="text" class="lc" readonly value="{{l}}">
+          <!-- <pre>{{l}}</pre> -->
+        </div>
+      </div>
+      <input type="text" class="command" name="command" placeholder="Enter python command here..." [(ngModel)]="command" (keydown.enter)="check_command()" />
+        
+    </div>
+  
+  </div>
+  
