@@ -1,3 +1,31 @@
+
+<!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true" *ngIf="selectedUser">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Name: {{selectedUser.name}}</li>
+          <li class="list-group-item">Handle: @{{selectedUser.screen_name}}</li>
+          <li class="list-group-item">Description: {{selectedUser.description}}</li>
+          <li class="list-group-item">Followers: {{selectedUser.followers_count}} </li>
+          <li class="list-group-item">Verified:  <i class="fas fa-{{selectedUser.verified ? 'check' : 'times'}}"></i> </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <ul class="list-group" *ngIf="docs.length > 0 else loading">
   <li class="list-group-item" *ngFor="let d of docs">
     <div class="media">
@@ -13,12 +41,12 @@
           {{d.text}}
         </ng-template>
 
-        {{d.text}}
         <!-- <div>
          <span> <i class="fas fa-retweet"></i> 10 </span> 
          <span> <i class="fas fa-retweet"></i> 10 </span> 
         </div> -->
-        <p class="text-muted"> Posted on: {{d.date}} </p>
+        <p class="text-muted mb-0"> Posted on: {{d.date}} </p>
+        <button type="button" class="btn btn-link float-right" data-toggle="modal" data-target="#userModal" (click)="onMoreInfoClick(d.user)" >More info</button>
       </div>
     </div>
   </li>

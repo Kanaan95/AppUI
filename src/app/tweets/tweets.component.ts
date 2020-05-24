@@ -13,6 +13,9 @@ export class TweetsComponent implements OnInit, OnDestroy {
 
   private _change
 
+  // Selected user to see more info
+  selectedUser: any
+
   constructor(private _appService: AppService) { }
 
   ngOnInit(): void {
@@ -26,22 +29,27 @@ export class TweetsComponent implements OnInit, OnDestroy {
         // this.docs['date'] = this.convertDate(this.docs['created_at'])
       }
     )
-    
+
     this._change = this._appService.getNotification().subscribe(
-      res =>{
+      res => {
         var tweet = res
         tweet['date'] = this.convertDate(tweet['created_at'])
         this.docs.push(tweet)
       }
     )
   }
+  ngOnDestroy() {
+    this._change.unsubscribe()
+  }
 
-  convertDate(date){
+  convertDate(date) {
     return new Date(date).toLocaleDateString('fr-FR')
   }
 
-  ngOnDestroy(){
-    this._change.unsubscribe()
+  onMoreInfoClick(user){
+    this.selectedUser = user
+    console.log(user)
   }
+
 
 }
