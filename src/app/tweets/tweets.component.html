@@ -1,10 +1,24 @@
 <ul class="list-group" *ngIf="docs.length > 0 else loading">
   <li class="list-group-item" *ngFor="let d of docs">
     <div class="media">
-      <img src="../../assets/images/avatar.png" class="mr-3" height="96" width="96" alt="...">
+      <img src="{{d.user.profile_image_url_https}}"  class="mr-3 user_profile"  height="96" width="96" alt="...">
       <div class="media-body">
-        <h5 class="mt-0 mb-1">{{d.handle}}</h5>
-        {{d.tweet}}
+        <h5 class="mt-0 mb-1">@{{d.user.screen_name}}</h5>
+
+        <div *ngIf="(d.extended_tweet && d.extended_tweet.full_text) else text">
+          {{d.extended_tweet.full_text}}
+        </div>
+
+        <ng-template #text>
+          {{d.text}}
+        </ng-template>
+
+        {{d.text}}
+        <!-- <div>
+         <span> <i class="fas fa-retweet"></i> 10 </span> 
+         <span> <i class="fas fa-retweet"></i> 10 </span> 
+        </div> -->
+        <p class="text-muted"> Posted on: {{d.date}} </p>
       </div>
     </div>
   </li>

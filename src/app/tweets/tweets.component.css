@@ -6,3 +6,9 @@
 .list-group-item{
     cursor: pointer;
 }
+
+.user_profile{
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+}
