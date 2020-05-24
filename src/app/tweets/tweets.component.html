@@ -1,6 +1,6 @@
-
 <!-- Modal -->
-<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true" *ngIf="selectedUser">
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true"
+  *ngIf="selectedUser">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -15,7 +15,8 @@
           <li class="list-group-item">Handle: @{{selectedUser.screen_name}}</li>
           <li class="list-group-item">Description: {{selectedUser.description}}</li>
           <li class="list-group-item">Followers: {{selectedUser.followers_count}} </li>
-          <li class="list-group-item">Verified:  <i class="fas fa-{{selectedUser.verified ? 'check' : 'times'}}"></i> </li>
+          <li class="list-group-item">Verified: <i class="fas fa-{{selectedUser.verified ? 'check' : 'times'}}"></i>
+          </li>
         </ul>
       </div>
       <div class="modal-footer">
@@ -29,7 +30,7 @@
 <ul class="list-group" *ngIf="docs.length > 0 else loading">
   <li class="list-group-item" *ngFor="let d of docs">
     <div class="media">
-      <img src="{{d.user.profile_image_url_https}}"  class="mr-3 user_profile"  height="96" width="96" alt="...">
+      <img src="{{d.user.profile_image_url_https}}" class="mr-3 user_profile" height="96" width="96" alt="...">
       <div class="media-body">
         <h5 class="mt-0 mb-1">@{{d.user.screen_name}}</h5>
 
@@ -41,12 +42,29 @@
           {{d.text}}
         </ng-template>
 
+        <div class="row mt-3 justify-content-between align-items-center">
+
+          <div class="col-md-5">
+            <div *ngIf="d.confidence">
+              <p class="text-muted mb-0">Confidence: {{d.confidence}}</p>
+              <p class="text-muted mb-0"> Posted on: {{d.date}} </p>
+            </div>
+          </div>
+
+          <div class="col-md-5">
+            <button type="button" class="btn btn-link float-right" data-toggle="modal" data-target="#userModal"
+              (click)="onMoreInfoClick(d.user)">More info</button>
+          </div>
+
+        </div>
+
+
         <!-- <div>
          <span> <i class="fas fa-retweet"></i> 10 </span> 
          <span> <i class="fas fa-retweet"></i> 10 </span> 
         </div> -->
-        <p class="text-muted mb-0"> Posted on: {{d.date}} </p>
-        <button type="button" class="btn btn-link float-right" data-toggle="modal" data-target="#userModal" (click)="onMoreInfoClick(d.user)" >More info</button>
+
+
       </div>
     </div>
   </li>
